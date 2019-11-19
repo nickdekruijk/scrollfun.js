@@ -18,7 +18,7 @@ var scrollElement = new ScrollFun({
 */
 
 window.ScrollFun = function(options) {
-    function val(v) { return typeof v === "function" ? v() : v; } // Helper function to check if a value is a function or not
+    function val(v, e, n) { return typeof v === "function" ? v(e, n) : v; } // Helper function to check if a value is a function or not
     // Default settings
     this.option = {
         selector: '.element',
@@ -127,7 +127,7 @@ window.ClassMagic = function(options) {
 }
 
 window.Sticky = function(options) {
-    function val(v) { return typeof v === "function" ? v() : v; } // Helper function to check if a value is a function or not
+    function val(v, e, n) { return typeof v === "function" ? v(e, n) : v; } // Helper function to check if a value is a function or not
     // Default settings
     this.option = {
         selector: '.element',
@@ -143,8 +143,8 @@ window.Sticky = function(options) {
     // update() method triggered by every scroll event
     this.update = function() {
         let scrollTop = document.documentElement.scrollTop;
-        document.querySelectorAll(_this.option.selector).forEach(function(element) {
-            if (scrollTop >= val(_this.option.start)) {
+        document.querySelectorAll(_this.option.selector).forEach(function(element, n) {
+            if (scrollTop >= val(_this.option.start, element, n)) {
                 element.classList.add(_this.option.className);
             } else {
                 element.classList.remove(_this.option.className);
