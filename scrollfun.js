@@ -37,43 +37,38 @@ window.ScrollFun = function(options) {
     this.update = function(t) {
         const transformStyles = ['perspective', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'translateX', 'translateY', 'translateZ', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'skewX', 'skewY'];
         const filterStyles = ['blur', 'brightness', 'contrast', 'grayscale', 'hue-rotate', 'invert', 'saturate', 'sepia'];
-        let transform = '';
-        let filter = '';
 
         let scrollTop = document.documentElement.scrollTop;
-        let percentage = (scrollTop - val(_this.option.start)) / (val(_this.option.end) - val(_this.option.start));
 
-        if (_this.option.limitWithin) {
-            if (percentage < 0) percentage = 0;
-            if (percentage > 1) percentage = 1;
-        }
-
-        if (_this.option.styles) {
-            Object.keys(_this.option.styles).forEach(function(style) {
-                let styleValue = (val(_this.option.styles[style][1]) - val(_this.option.styles[style][0])) * percentage + val(_this.option.styles[style][0]);
-                if (transformStyles.indexOf(style) != -1) {
-                    transform += ' ' + style + '(' + styleValue + (_this.option.styles[style][2] || '') + ')';
-                } else if (filterStyles.indexOf(style) != -1) {
-                    filter += ' ' + style + '(' + styleValue + (_this.option.styles[style][2] || '') + ')';
-                } else {
-                    document.querySelectorAll(_this.option.selector).forEach(function(element) {
+        document.querySelectorAll(_this.option.selector).forEach(function(element, n) {
+            let transform = '';
+            let filter = '';
+            let percentage = (scrollTop - val(_this.option.start, element, n)) / (val(_this.option.end, element, n) - val(_this.option.start, element, n));
+            if (_this.option.limitWithin) {
+                if (percentage < 0) percentage = 0;
+                if (percentage > 1) percentage = 1;
+            }
+            if (_this.option.styles) {
+                Object.keys(_this.option.styles).forEach(function(style) {
+                    let styleValue = (val(_this.option.styles[style][1], element, n) - val(_this.option.styles[style][0], element, n)) * percentage + val(_this.option.styles[style][0], element, n);
+                    if (transformStyles.indexOf(style) != -1) {
+                        transform += ' ' + style + '(' + styleValue + (_this.option.styles[style][2] || '') + ')';
+                    } else if (filterStyles.indexOf(style) != -1) {
+                        filter += ' ' + style + '(' + styleValue + (_this.option.styles[style][2] || '') + ')';
+                    } else {
                         element.style[style] = styleValue;
-                    });
-                }
-            });
-        }
+                    }
+                });
+            }
 
-        if (transform) {
-            document.querySelectorAll(_this.option.selector).forEach(function(element) {
+            if (transform) {
                 element.style['transform'] = transform;
-            });
-        }
+            }
 
-        if (filter) {
-            document.querySelectorAll(_this.option.selector).forEach(function(element) {
+            if (filter) {
                 element.style['filter'] = filter;
-            });
-        }
+            }
+        });
     }
 
     // Setup onscroll and resize events and do initial update()
