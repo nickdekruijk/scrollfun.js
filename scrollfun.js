@@ -82,6 +82,22 @@ window.ScrollFun = function(options) {
     this.update();
 }
 
+window.getOffset = function(element) {
+    var el = element;
+    var offsetLeft = 0;
+    var offsetTop  = 0;
+    do {
+        offsetLeft += el.offsetLeft;
+        offsetTop += el.offsetTop;
+        el = el.offsetParent;
+    } while(el);
+
+    return {
+        top: offsetTop,
+        left: offsetLeft,
+    }
+}
+
 window.ClassMagic = function(options) {
     // Default settings
     this.option = {
@@ -101,14 +117,7 @@ window.ClassMagic = function(options) {
         let scrollTop = document.documentElement.scrollTop;
         let windowHeight = window.innerHeight;
         document.querySelectorAll(_this.option.selector).forEach(function(element, n) {
-            var el = element;
-            var offsetLeft = 0;
-            var offsetTop  = 0;
-            do {
-                offsetLeft += el.offsetLeft;
-                offsetTop += el.offsetTop;
-                el = el.offsetParent;
-            } while(el);
+            offsetTop = getOffset(element).top;
 
             var topPosition = (offsetTop - scrollTop) / windowHeight;
             var bottomPosition = 1 - (offsetTop + element.offsetHeight - scrollTop) / windowHeight;
