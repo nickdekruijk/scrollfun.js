@@ -1,10 +1,11 @@
 {
     "name": "nickdekruijk/scrollfun.js",
-    "description": "A library to add fun scroll effects written in vanilla javascript",
+    "description": "A vanilla javascript library to add fun scroll effects",
     "license": "MIT",
 	"keywords": [
 		"parallax",
 		"scroll",
+		"effects",
 		"fun",
 		"javascript",
 	],
