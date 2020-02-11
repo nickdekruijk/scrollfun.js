@@ -27,6 +27,7 @@ window.ScrollFun = function(options) {
         limitWithin: false,
         styles: {},
     }
+
     // Merge defaults and options into settings to use
     Object.assign(this.option, options);
 
@@ -80,12 +81,12 @@ window.ScrollFun = function(options) {
 window.getOffset = function(element) {
     var el = element;
     var offsetLeft = 0;
-    var offsetTop  = 0;
+    var offsetTop = 0;
     do {
         offsetLeft += el.offsetLeft;
         offsetTop += el.offsetTop;
         el = el.offsetParent;
-    } while(el);
+    } while (el);
 
     return {
         top: offsetTop,
@@ -101,6 +102,7 @@ window.ClassMagic = function(options) {
         start: .5,
         end: .5,
     }
+
     // Merge defaults and options into settings to use
     Object.assign(this.option, options);
 
@@ -138,6 +140,7 @@ window.Sticky = function(options) {
         className: 'sticky',
         start: 100,
     }
+
     // Merge defaults and options into settings to use
     this.option = Object.assign(this.option, options);
 
