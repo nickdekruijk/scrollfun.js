@@ -115,7 +115,6 @@ window.ClassMagic = function(options) {
         let windowHeight = window.innerHeight;
         document.querySelectorAll(_this.option.selector).forEach(function(element, n) {
             offsetTop = getOffset(element).top;
-
             var topPosition = (offsetTop - scrollTop) / windowHeight;
             var bottomPosition = 1 - (offsetTop + element.offsetHeight - scrollTop) / windowHeight;
             if (bottomPosition > _this.option.start && topPosition > _this.option.end) {
