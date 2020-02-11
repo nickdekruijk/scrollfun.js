@@ -57,7 +57,7 @@ window.ScrollFun = function(options) {
                     } else if (filterStyles.indexOf(style) != -1) {
                         filter += ' ' + style + '(' + styleValue + (_this.option.styles[style][2] || '') + ')';
                     } else {
-                        element.style[style] = styleValue;
+                        element.style[style] = styleValue + (_this.option.styles[style][2] || '');
                     }
                 });
             }
