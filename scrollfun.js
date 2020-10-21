@@ -44,7 +44,8 @@ window.ScrollFun = function(options) {
         document.querySelectorAll(_this.option.selector).forEach(function(element, n) {
             let transform = '';
             let filter = '';
-            let percentage = (scrollTop - val(_this.option.start, element, n)) / (val(_this.option.end, element, n) - val(_this.option.start, element, n));
+            let start = val(_this.option.start, element, n);
+            let percentage = (scrollTop - start) / (val(_this.option.end, element, n) - start);
             if (_this.option.limitWithin) {
                 if (percentage < 0) percentage = 0;
                 if (percentage > 1) percentage = 1;
